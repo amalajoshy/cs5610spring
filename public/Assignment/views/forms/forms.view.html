@@ -1,0 +1,44 @@
+<div class="container-fluid text-center">
+    <div class="row content">
+        <h1 class="text-center page-header">Forms</h1>
+        <div class="col-lg-4 col-md-6 col-md-offset-4 col-xs-offset-1 main">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
+                <li role="presentation"><a href="#/fields">Fields</a></li>
+            </ul>
+            <table class="table table-bordered table-hover table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th class="col-sm-3"><a href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></a> Form Name</th>
+                    <th class="col-sm-2"><a href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></a> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-left"><input class="col" type="text" ng-model="form.title" id="form" placeholder="name"></td>
+                    <td><a href="#" ng-click="addForm(form)"><span class="glyphicon glyphicon-plus pull-left"></span></a>
+                        <a href="#" ng-click="updateForm(form)"><span class="glyphicon glyphicon-ok pull-right"></span></a></td>
+                </tr>
+                <tr>{{forms}}</tr>
+                <tr ng-repeat="td_form in forms">
+                    <td class="text-left">{{td_form.title}}</td>
+                    <td class="text-left"><a href="#" ng-click="deleteForm($index)"><span class="glyphicon glyphicon-remove pull-left"></span></a>
+                        <a href="#" ng-click="selectForm($index)"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>
+                </tr>
+                <!--<tr>-->
+                    <!--<td class="text-left">Contact List</td>-->
+                    <!--<td class="text-left"><a href="#" ng-click="deleteForm(form)"><span class="glyphicon glyphicon-remove pull-left"></span></a>-->
+                        <!--<a href="#" ng-click="selectForm(form)"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="text-left">To Do list</td>-->
+                    <!--<td class="text-left"><a href="#" ng-click="deleteForm(form)"><span class="glyphicon glyphicon-remove pull-left"></span></a>-->
+                        <!--<a href="#" ng-click="selectForm(form)"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
