@@ -44,6 +44,10 @@
                 $scope.message = "Please provide a lastname";
                 return;
             }
+            if (!user.email) {
+                $scope.message = "Please provide a valid email address";
+                return;
+            }
             if (user.username !== $scope.currentUser.username) {
                 var ex_user = UserService.findUserByCredentials(user.username, user.password, $.noop);
                 if (ex_user !== null) {

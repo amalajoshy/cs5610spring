@@ -15,30 +15,17 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="text-left"><input class="col" type="text" ng-model="form.title" id="form" placeholder="name"></td>
-                    <td><a href="#" ng-click="addForm(form)"><span class="glyphicon glyphicon-plus pull-left"></span></a>
-                        <a href="#" ng-click="updateForm(form)"><span class="glyphicon glyphicon-ok pull-right"></span></a></td>
+                    <td class="text-left"><input class="col" type="text" ng-model="form.title" id="formtitle" placeholder="name"></td>
+                    <td><a href="#/forms"><span ng-click="addForm(form)" class="glyphicon glyphicon-plus pull-left"></span></a>
+                        <a href="#/forms" ng-click="updateForm(form)"><span class="glyphicon glyphicon-ok pull-right"></span></a></td>
                 </tr>
-                <tr>{{forms}}</tr>
                 <tr ng-repeat="td_form in forms">
                     <td class="text-left">{{td_form.title}}</td>
-                    <td class="text-left"><a href="#" ng-click="deleteForm($index)"><span class="glyphicon glyphicon-remove pull-left"></span></a>
-                        <a href="#" ng-click="selectForm($index)"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>
+                    <td class="text-left"><a href="#/forms" ><span ng-click="deleteForm($index)" class="glyphicon glyphicon-remove pull-left"></span></a>
+                        <a href="#/forms"><span ng-click="selectForm(td_form, $index)" class="glyphicon glyphicon-pencil pull-right"></span></a></td>
                 </tr>
-                <!--<tr>-->
-                    <!--<td class="text-left">Contact List</td>-->
-                    <!--<td class="text-left"><a href="#" ng-click="deleteForm(form)"><span class="glyphicon glyphicon-remove pull-left"></span></a>-->
-                        <!--<a href="#" ng-click="selectForm(form)"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="text-left">To Do list</td>-->
-                    <!--<td class="text-left"><a href="#" ng-click="deleteForm(form)"><span class="glyphicon glyphicon-remove pull-left"></span></a>-->
-                        <!--<a href="#" ng-click="selectForm(form)"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>-->
-                <!--</tr>-->
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>
-

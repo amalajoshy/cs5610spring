@@ -29,6 +29,10 @@
                 $scope.message = "Passwords must match";
                 return;
             }
+            if (!user.email) {
+                $scope.message = "Please provide a valid email address";
+                return;
+            }
             var ex_user = UserService.findUserByCredentials(user.username, user.password, $.noop);
             if (ex_user !== null) {
                 $scope.message = "User already exists";
@@ -36,6 +40,7 @@
             }
             var newUser = UserService.createUser($scope.user, $.noop);
             UserService.setCurrentUser(newUser);
+            $scope.message = "Registration succesful";
             $location.url("/profile");
         }
     }

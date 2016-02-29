@@ -2,45 +2,54 @@
  * Created by amala on 24/02/16.
  */
 (function () {
-    "use strict";
+    'use strict';
     /*global angular*/
     angular
         .module("FormBuilderApp")
         .factory("FormService", FormService);
 
-    function FormService() {
-        var services2 = {
-            forms : [{"_id": "000", "title": "Contacts", "userId": 123},
-                    {"_id": "010", "title": "ToDo", "userId": 123},
-                    {"_id": "020", "title": "CDs", "userId": 234}],
+    function FormService($rootScope) {
+        var services = {
+            forms : [{"f_id": "000", "title": "Contacts", "userId": 123},
+                    {"f_id": "010", "title": "ToDo", "userId": 123},
+                    {"f_id": "020", "title": "CDs", "userId": 234}],
+
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
-            getAllForms: getAllForms
+            getAllForms: getAllForms,
+            getFormId: getFormId
         };
-        return services2;
+        return services;
 
+        function getFormId(form) {
+            for (var u in services.forms) {
+                if (services.forms[u].f_id === form.f_id) {
+                    return services.forms[u].f_id;
+                }
+            }
+        }
         function getAllForms() {
-            return services2.forms;
+            return services.forms;
         }
 
-        function createFormForUser(userId, form, callback){
+        function createFormForUser(userId, form, callback) {
             var new_form = {
-                _id: (new Date()).getTime(),
+                f_id: (new Date()).getTime(),
                 title: form.title,
                 userId: userId
             };
-            services2.forms.push(new_form);
+            services.forms.push(new_form);
             callback(new_form);
             return new_form;
 
         }
-        function findAllFormsForUser(userId, callback){
+        function findAllFormsForUser(userId, callback) {
             var userForms = [];
-            for (var u in services2.forms) {
-                if (services2.forms[u].userId === userId) {
-                    userForms.push(services2.forms[u]);
+            for (var u in services.forms) {
+                if (services.forms[u].userId === userId) {
+                    userForms.push(services.forms[u]);
                 }
             }
             callback(userForms);
@@ -48,28 +57,28 @@
 
         }
         function deleteFormById(formId, callback){
-            for (var u in services2.forms) {
-                if (services2.forms[u]._id === formId) {
-                    services2.forms.splice(u, 1);
+            for (var u in services.forms) {
+                if (services.forms[u].f_id === formId) {
+                    services.forms.splice(u, 1);
                 }
             }
-            callback(forms);
+            callback(service.forms);
+            return service.forms;
         }
         function updateFormById(formId, newForm, callback){
-            for (var u in services2.forms) {
-                if (services2.forms[u]._id === formId) {
-                    services2.forms[u].title = newForm.title;
-                    services2.forms[u].userId = newForm.userId;
-                    callback(services2.forms[u]);
-                    return services2.forms[u];
+            for (var u in services.forms) {
+                if (services.forms[u].f_id === formId) {
+                    services.forms[u].title = newForm.title;
+                    services.forms[u].userId = newForm.userId;
+                    callback(services.forms[u]);
+                    return services.forms[u];
                 }
-                else
-                    callback(null);
-                    return null;
             }
+            callback(null);
+            return null;
         }
 
 
     }
-})
+})();
 
