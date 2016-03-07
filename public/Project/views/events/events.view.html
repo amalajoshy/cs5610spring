@@ -21,11 +21,11 @@
                     <td class="text-left"><input id="pac-input" class="controls" type="text" ng-model="event.location" placeholder="venue"></td>
                     <td class="text-left"><input class="col" type="text" ng-model="event.time_date" id="eventdateTime" placeholder="date"></td>
                     <td><a href="#/events"><span ng-click="addEvent(event)" class="glyphicon glyphicon-plus pull-left"></span></a>
-                        <a href="#/events" ng-click="updateEvent(event)"><span class="glyphicon glyphicon-ok pull-right"></span></a></td>
+                        <a href="#/events"><span ng-click="updateEvent(event)" class="glyphicon glyphicon-ok pull-right"></span></a></td>
                 </tr>
                 <tr ng-repeat="td_event in events">
                     <td class="text-left">{{td_event.title}}</td>
-                    <td class="text-left">{{td_event.location}}<div id="map" class="event-map"></div></td>
+                    <td class="text-left">{{td_event.location}}</td>
                     <td class="text-left">{{td_event.time_date}}</td>
                     <td class="text-left"><a href="#/events" ><span ng-click="deleteEvent($index)" class="glyphicon glyphicon-remove pull-left"></span></a>
                         <a href="#/events"><span ng-click="selectEvent(td_event, $index)" class="glyphicon glyphicon-pencil pull-right"></span></a></td>

@@ -23,7 +23,6 @@
         };
         return services;
 
-        
         function getAllTickets() {
             return services.tickets;
         }
@@ -36,7 +35,6 @@
             services.tickets.push(new_ticket);
             callback(new_ticket);
             return new_ticket;
-
         }
         function findAllTicketsForUser(userId, callback) {
             var usertickets = [];

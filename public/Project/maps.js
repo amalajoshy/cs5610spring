@@ -16,13 +16,12 @@ function initMap($scope) {
     });
 }
 
-function geocodePlaceId(geocoder, map, infowindow, place_id) {
+function geocodePlaceId(geocoder, map, infowindow, place_id, zoom_level) {
     "use strict";
     geocoder.geocode({'placeId': place_id}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             if (results[0]) {
-                alert("updating maps" + place_id);
-                map.setZoom(11);
+                map.setZoom(zoom_level);
                 map.setCenter(results[0].geometry.location);
                 var marker = new google.maps.Marker({
                     map: map,
@@ -39,30 +38,23 @@ function geocodePlaceId(geocoder, map, infowindow, place_id) {
     });
 }
 
-//function displayMap(map_id, place_id) {
-//    "use strict";
-//    if (place_id === null) {
-//        return;
-//    }
-//    alert("map id: "+map_id);
-//    var map = new google.maps.Map(document.getElementById(map_id), {
-//        zoom: 8,
-//        center: {lat: 40.72, lng: -73.96}
-//    });
-//    var geocoder = new google.maps.Geocoder;
-//    var infowindow = new google.maps.InfoWindow;
-//    geocodePlaceId(geocoder, map, infowindow, place_id);
-//}
-
-function initDisplayMap($scope) {
+function displayMap($scope, map_id, place_id, zoom_level) {
     "use strict";
-    var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
+    if (place_id === null) {
+        return;
+    }
+    geocodePlaceId($scope.geocoder, $scope.map[map_id], $scope.infowindow, place_id, zoom_level);
+}
+
+function initDisplayMap($scope, map_id) {
+    "use strict";
+    var map = new google.maps.Map(document.getElementById(map_id), {
+        zoom: 17,
         center: {lat: 40.72, lng: -73.96}
     });
     var geocoder = new google.maps.Geocoder;
     var infowindow = new google.maps.InfoWindow;
     $scope.geocoder = geocoder;
     $scope.infowindow = infowindow;
-    $scope.map = map;
+    $scope.map[map_id] = map;
 }

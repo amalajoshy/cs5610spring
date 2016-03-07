@@ -23,7 +23,8 @@
             findUserByCredentials: findUserByCredentials,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            updateUserById: updateUserById
         };
         return services;
 
@@ -36,8 +37,8 @@
         }
 
         function findAllUsers(callback) {
-            callback(users);
-            return users;
+            callback(services.users);
+            return services.users;
         }
 
         function createUser(user, callback) {
@@ -82,6 +83,22 @@
                 }
                 else
                     callback(null);
+                    return null;
+            }
+        }
+
+        function updateUserById(userId, user, callback){
+            for (var u in services.users) {
+                if (services.users[u]._id === userId) {
+                    services.users[u].username = user.username;
+                    services.users[u].password = user.password;
+                    services.users[u].roles = user.roles;
+                    callback(services.users[u]);
+                    return services.users[u];
+                }
+                else
+                    callback(null);
+                    return null;
             }
         }
     }

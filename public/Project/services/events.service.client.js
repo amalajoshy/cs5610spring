@@ -10,7 +10,7 @@
 
     function EventService($rootScope) {
         var services = {
-            events : [{"_id": "000", "title": "Cooking", "place_id": "ChIJd8BlQ2BZwokRAFUEcm_qrcA", "location": "Seattle", "time_date": "9 pm 10th Sept 2016", "user_id": 123, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua."},
+            events : [{"_id": "000", "title": "Cooking class", "place_id": "ChIJd8BlQ2BZwokRAFUEcm_qrcA", "location": "Seattle", "time_date": "9 pm 10th Sept 2016", "user_id": 123, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua."},
                     {"_id": "010", "title": "ABC Conference", "place_id": "ChIJd8BlQ2BZwokRAFUEcm_qrcA", "location": "California", "time_date": "9 pm 10th Sept 2016", "user_id": 123, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua."},
                     {"_id": "020", "title": "Career Launch", "place_id": "ChIJd8BlQ2BZwokRAFUEcm_qrcA", "location": "Boston", "time_date": "9 pm 10th Sept 2016", "userId": 234, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua."}],
             createEventForUser: createEventForUser,
@@ -81,9 +81,9 @@
                 if (services.events[u]._id === eventId) {
                     services.events[u].title = newEvent.title;
                     services.events[u].location = newEvent.location;
-                    services.events[u].place_id = newEvent.place_id;
+                    //services.events[u].place_id = newEvent.place_id;
                     services.events[u].time_date = newEvent.time_date;
-                    services.events[u].userId = newEvent.userId;
+                    //services.events[u].userId = newEvent.userId;
                     callback(services.events[u]);
                     return services.events[u];
                 }

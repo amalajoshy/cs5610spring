@@ -17,15 +17,15 @@
                         <td><input class="col" type="text" id="user" ng-model="user.username" placeholder="Username"></td>
                         <td><input type="password" id="password" ng-model="user.password" placeholder="Password"></td>
                         <td><input type="text" id="role" ng-model="user.roles" placeholder="role1, role2"></td>
-                        <td><a href="#"><span class="glyphicon glyphicon-plus pull-left"></span></a>
-                            <a href="#"><span class="glyphicon glyphicon-ok pull-right"></span></a></td>
+                        <td><a href="#/admin"><span ng-click="addUser(user)" class="glyphicon glyphicon-plus pull-left"></span></a>
+                            <a href="#/admin"><span ng-click="updateUser(user)" class="glyphicon glyphicon-ok pull-right"></span></a></td>
                     </tr>
                     <tr ng-repeat="td_user in users">
                         <td class="text-left">{{td_user.username}}</td>
                         <td class="text-left">{{td_user.password}}</td>
                         <td class="text-left">{{td_user.roles}}</td>
-                        <td class="text-left"><a href="#/admin" ><span ng-click="deleteEvent($index)" class="glyphicon glyphicon-remove pull-left"></span></a>
-                            <a href="#/admin"><span ng-click="selectEvent(td_event, $index)" class="glyphicon glyphicon-pencil pull-right"></span></a></td>
+                        <td class="text-left"><a href="#/admin" ><span ng-click="deleteUser($index)" class="glyphicon glyphicon-remove pull-left"></span></a>
+                            <a href="#/admin"><span ng-click="selectUser(td_user, $index)" class="glyphicon glyphicon-pencil pull-right"></span></a></td>
                     </tr>
                     </tbody>
                 </table>

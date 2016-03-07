@@ -28,14 +28,10 @@
         }
 
         function updateEvent(event) {
+            event.place_id = $scope.place_id;
+            event.location = $scope.location;
             var eventId = EventService.getEventId(event);
             var updated_event = EventService.updateEventById(eventId, event, $.noop);
-            $scope.event._id = null;
-            $scope.event.title = null;
-            $scope.event.place_id = null;
-            $scope.event.location = null;
-            $scope.event.time_date = null;
-            displayMapForEvent(updated_event);
         }
 
         function deleteEvent(index) {
@@ -50,11 +46,6 @@
             $scope.event.place_id = $scope.events[index].place_id;
             $scope.event.location = $scope.events[index].location;
             $scope.event.time_date = $scope.events[index].time_date;
-        }
-
-        function displayMapForEvent(event) {
-            var map = "map-" + event._id;
-            displayMap(map, event.place_id);
         }
     }
 }());
