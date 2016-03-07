@@ -1,0 +1,34 @@
+<div class="col-xs-1 col-sm-2 sidebar sidebar-xs" ng-controller="SidebarController">
+    <ul class="nav nav-sidebar">
+        <li ng-class="{'active' : $location.url() == '/'}">
+            <a href="#/">
+                <span class="visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline glyphicon glyphicon-home"></span>
+                <span class="hidden-xs">Home</span>
+            </a>
+        </li>
+        <li ng-show="currentUser" ng-class="{'active' : $location.url() == '/profile'}">
+            <a href="#/profile">
+                <span class="visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline glyphicon glyphicon-user"></span>
+                <span class="hidden-xs">Profile</span>
+            </a>
+        </li>
+        <li ng-show="currentUser.roles.indexOf('organizer') >= 0" ng-class="{'active' : $location.url() == '/admin'}">
+            <a href="#/admin">
+                <span class="visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline glyphicon glyphicon-wrench"></span>
+                <span class="hidden-xs">Admin</span>
+            </a>
+        </li>
+        <li ng-show="currentUser" ng-class="{'active' : $location.url() == '/events' || $location.url() == '/fields'}">
+            <a href="#/events">
+                <span class="visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline glyphicon glyphicon-file"></span>
+                <span class="hidden-xs">Events</span>
+            </a>
+        </li>
+        <li ng-show="currentUser" ng-class="{'active' : $location.url() == '/tickets'}">
+            <a href="#/tickets">
+                <span class="visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline glyphicon glyphicon-qrcode"></span>
+                <span class="hidden-xs"> Manage Tickets</span>
+            </a>
+        </li>
+    </ul>
+</div>

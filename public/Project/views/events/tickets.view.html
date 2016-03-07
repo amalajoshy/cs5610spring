@@ -1,0 +1,31 @@
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1 main">
+            <h2 class="text-center profile-title">Manage Tickets</h2>
+            <br>
+            <br>
+            <table class="table table-bordered table-hover table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th><a href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></a> Ticket ID</th>
+                    <th><a href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></a> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input class="col-lg-6" type="text"  ng-model="ticket.id" placeholder="Ticket ID"></td>
+                    <td><a href="#"><span class="glyphicon glyphicon-plus pull-left"></span></a>
+                        <a href="#"><span class="glyphicon glyphicon-ok pull-right"></span></a></td>
+                </tr>
+                <tr ng-repeat="td_ticket in tickets">
+                    <td class="text-left">{{td_ticket.ticket_id}}</td>
+                    <td class="text-left"><a href="#/tickets" ><span ng-click="deleteEvent($index)" class="glyphicon glyphicon-remove pull-left"></span></a>
+                        <a href="#/tickets"><span ng-click="selectEvent(td_event, $index)" class="glyphicon glyphicon-pencil pull-right"></span></a></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
