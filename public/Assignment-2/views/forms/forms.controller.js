@@ -42,6 +42,7 @@
 
         function selectForm(form, index) {
             $scope.selectedFormIndex = index;
+            $scope.form = form;
             $scope.form.f_id = $scope.forms[index].f_id;
             $scope.form.title = $scope.forms[index].title;
         }

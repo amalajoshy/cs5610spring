@@ -8,7 +8,6 @@
     angular
         .module("TixterApp")
         .controller("MainController", function ($scope, $location) {
-            console.log("I am at 5055")
             $scope.$location = $location;
         });
 }());

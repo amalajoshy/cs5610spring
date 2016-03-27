@@ -1,0 +1,137 @@
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-7 col-sm-offset-3 col-xs-12 col-xs-offset-2 main">
+            <h1 class="page-header">Forms : {{selectedForm.title}}</h1>
+            <div class="row">
+                <ul class="nav nav-tabs">
+                    <li role="presentation"><a href="#/forms">Forms</a></li>
+                    <li role="presentation" class="active"><a href="#/fields">Fields</a></li>
+                </ul>
+            </div>
+            <form role=form">
+                <div id="fields-sortable">
+                    <div class="row form-group" ng-repeat="field in model.fields track by $index">
+                        <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{field.label}}</label>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="modal fade" id="modal-{{field._id}}" role="form">
+                                <div class="modal-form modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <a class="close" data-dismiss="modal">×</a>
+                                            <h3 ng-show="field.type == singleLineTextField.type || field.type == emailField.type">{{singleLineText}}</h3>
+                                            <h3 ng-show="field.type == multiLineTextField.type">{{multiLineText}}</h3>
+                                            <h3 ng-show="field.type == dropdownField.type">{{dropdownText}}</h3>
+                                            <h3 ng-show="field.type == checkboxField.type">{{checkboxText}}</h3>
+                                            <h3 ng-show="field.type == radioButtonField.type">{{radioText}}</h3>
+                                            <h3 ng-show="field.type == dateField.type">{{dateText}}</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" id="modal-form-{{field._id}}">
+                                                <div class="form-group">
+                                                    <label>Label</label><br>
+                                                    <input class="form-control" type="text" name="label" value="{{field.label}}">
+                                                </div>
+                                                <div ng-show="field.type == singleLineTextField.type || field.type == multiLineTextField.type" class="form-group">
+                                                    <label>Placeholder</label><br>
+                                                    <input class="form-control" type="text" name="placeholder" value="{{field.placeholder}}">
+                                                </div>
+                                                <div ng-show="field.type == dropdownField.type || field.type == checkboxField.type || field.radioButtonField.type" class="form-group">
+                                                    <label>Options</label><br>
+                                                    <textarea>{{modalOptionsText(field)}}</textarea>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input class="btn btn-primary" type="submit" value="OK">
+                                            <input class="btn btn-failure" data-dismiss="modal" type="submit" value="Cancel">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input ng-show="field.type == singleLineTextField.type || field.type == dateField.type || field.type == emailField.type" type="{{field.type}}" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
+                            <select ng-show="field.type == dropdownField.type" class="form-control">
+                                <option ng-repeat="option in field.options" label="{{option.label}}">{{option.value}}</option>
+                            </select>
+                            <div ng-show="field.type == checkboxField.type" ng-repeat="option in field.options">
+                                <input type="{{checkboxField.type}}" id="{{option.value}}"> {{option.label}}
+                            </div>
+                            <div ng-show="field.type == radioButtonField.type" ng-repeat="option in field.options">
+                                <input type="{{radioButtonField.type}}" id="{{option.value}}"> {{option.label}}
+                            </div>
+                            <textarea ng-show="field.type == multiLineTextField.type" class="form-control" placeholder="{{field.placeholder}}"></textarea>
+                        </div>
+                        <div class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-4">
+                            <a style="cursor:pointer;"><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal-{{field._id}}"></span></a>
+                            <a href="#/fields"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#/fields"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a style="cursor: pointer;"><span class="glyphicon glyphicon-align-justify"></span></a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row form-group">
+                    <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Add new field :</label>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <select name="fieldType" id="fieldType" ng-model="model.fieldType" class="form-control">
+                            <option>{{singleLineText}}</option>
+                            <option>{{dateText}}</option>
+                            <option>{{dropdownText}}</option>
+                            <option>{{checkboxText}}</option>
+                            <option>{{radioText}}</option>
+                            <option>{{multiLineText}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-4">
+                        <a style="cursor:pointer"><span ng-click="addField(model.fieldType)" class="glyphicon glyphicon-plus"></span></a>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div ng-switch="model.fieldType">
+                        <div ng-switch-when="Single Line Text">
+                            <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{singleLineTextField.label}}</label>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <input class="form-control" type="{{singleLineTextField.type}}" placeholder="{{singleLineTextField.placeholder}}">
+                            </div>
+                        </div>
+                        <div ng-switch-when="Date">
+                            <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{dateField.label}}</label>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <input class="form-control" type="{{dateField.type}}" placeholder="{{dateField.placeholder}}">
+                            </div>
+                        </div>
+                        <div ng-switch-when="Dropdown">
+                            <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{dropdownField.label}}</label>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <select class="form-control">
+                                    <option ng-repeat="option in dropdownField.options" label="{{option.label}}">{{option.value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-switch-when="Checkboxes">
+                            <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{checkboxField.label}}</label>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <div ng-repeat="option in checkboxField.options">
+                                    <input type="{{checkboxField.type}}" id="{{option.value}}"> {{option.label}}
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-switch-when="Radio buttons">
+                            <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{radioButtonField.label}}</label>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <div ng-repeat="option in radioButtonField.options">
+                                    <input type="{{radioButtonField.type}}" id="{{option.value}}"> {{option.label}}
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-switch-when="Paragraph Text Field">
+                            <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{multiLineTextField.label}}</label>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <textarea class="form-control" placeholder="{{multiLineTextField.placeholder}}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
