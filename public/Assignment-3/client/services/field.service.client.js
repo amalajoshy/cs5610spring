@@ -36,7 +36,7 @@
             return $http.get("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 
-        function deleteFieldFromForm(formId, fieldId){
+        function deleteFieldFromForm(formId, fieldId) {
             return $http.delete("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 

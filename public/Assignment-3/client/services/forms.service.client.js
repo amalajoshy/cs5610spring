@@ -40,7 +40,7 @@
             return $http.delete("/api/assignment/form/" + formId);
         }
 
-        function updateFormById(formId, newForm){
+        function updateFormById(formId, newForm) {
             return $http.put("/api/assignment/form/" + formId, newForm);
         }
 

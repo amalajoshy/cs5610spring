@@ -21,7 +21,7 @@
                 </tr>
                 <tr ng-repeat="td_form in forms">
                     <td class="text-left"><a href="#/form/{{td_form._id}}/fields">{{td_form.title}}</a></td>
-                    <td class="text-left"><a href="#/forms" ><span ng-click="deleteForm($index)" class="glyphicon glyphicon-remove pull-left"></span></a>
+                    <td class="text-left"><a href="#/forms" ><span ng-click="deleteForm(td_form._id)" class="glyphicon glyphicon-remove pull-left"></span></a>
                         <a href="#/forms"><span ng-click="selectForm(td_form, $index)" class="glyphicon glyphicon-pencil pull-right"></span></a></td>
                 </tr>
                 </tbody>

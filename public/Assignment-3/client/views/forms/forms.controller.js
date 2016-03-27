@@ -38,9 +38,11 @@
                 });
         }
 
-        function deleteForm(index) {
-            console.log("remove: " + index);
-            $scope.forms.splice(index, 1);
+        function deleteForm(formId) {
+            FormService.deleteFormById(formId)
+                .then(function (response) {
+                    $scope.forms = response.data;
+                });
         }
 
         function selectForm(form, index) {

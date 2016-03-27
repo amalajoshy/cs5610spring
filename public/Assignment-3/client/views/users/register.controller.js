@@ -45,7 +45,6 @@
                         });
                 });
         }
-
         $scope.register = register;
     }
 })();
