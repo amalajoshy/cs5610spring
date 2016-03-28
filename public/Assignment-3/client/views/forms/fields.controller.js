@@ -19,8 +19,19 @@
                         $scope.model = {fieldType: null, fields: response2.data};
                         $scope.$location = $location;
                         $(function() {
-                            console.log("sorting done");
-                            $("#fields-sortable" ).sortable();
+                            $("#fields-sortable").sortable({
+                                update: function (event, ui) {
+                                    //var data = $(this).sortable('serialize');
+                                    var data = $(this).sortable("toArray");
+                                    console.log(data);
+                                    //// POST to server using $.post or $.ajax
+                                    //$.ajax({
+                                    //    data: data,
+                                    //    type: 'POST',
+                                    //    url: '/your/url/here'
+                                    //});
+                                }
+                            });
                             $("#fields-sortable" ).disableSelection();
                         });
                     });
@@ -28,6 +39,7 @@
 
         $scope.addField = addField;
         $scope.deleteField = deleteField;
+        $scope.updateField = updateField;
         $scope.modalOptionsText = modalOptionsText;
         $scope.submitFormField = submitFormField;
 
@@ -81,19 +93,18 @@
             }
         }
 
-        //    FieldService.createFieldForForm(user._id, form)
-        //        .then(function (response) {
-        //            $scope.forms.push(response.data);
-        //        });
-        //}
+        function updateField(field) {
+            FieldService.updateField(formId, field._id, field)
+                .then(function(response) {
+                    $scope.$location = $location;
+                });
+        }
 
         function deleteField(field) {
-            console.log("remove: " + index);
             $scope.forms.splice(index, 1);
         }
 
         function modalOptionsText(field) {
-            console.log("reached here");
             var text = "";
             for (var i in field.options) {
                 text += field.options[i].label + ":" + field.options[i].value + "\n";
