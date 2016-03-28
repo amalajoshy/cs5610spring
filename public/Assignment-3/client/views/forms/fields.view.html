@@ -10,7 +10,7 @@
             </div>
             <form role=form">
                 <div id="fields-sortable">
-                    <div class="row form-group" ng-repeat="field in model.fields track by $index">
+                    <div class="row form-group" ng-repeat="field in model.fields track by $index" id="{{field._id}}">
                         <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{field.label}}</label>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <div class="modal fade" id="modal-{{field._id}}" role="form">
@@ -29,20 +29,20 @@
                                             <form class="form-horizontal" id="modal-form-{{field._id}}">
                                                 <div class="form-group">
                                                     <label>Label</label><br>
-                                                    <input class="form-control" type="text" name="label" value="{{field.label}}">
+                                                    <input class="form-control" type="text" name="label" ng-model="field.label">
                                                 </div>
                                                 <div ng-show="field.type == singleLineTextField.type || field.type == multiLineTextField.type" class="form-group">
                                                     <label>Placeholder</label><br>
-                                                    <input class="form-control" type="text" name="placeholder" value="{{field.placeholder}}">
+                                                    <input class="form-control" type="text" name="placeholder" ng-model="field.placeholder">
                                                 </div>
                                                 <div ng-show="field.type == dropdownField.type || field.type == checkboxField.type || field.radioButtonField.type" class="form-group">
                                                     <label>Options</label><br>
-                                                    <textarea>{{modalOptionsText(field)}}</textarea>
+                                                    <textarea>{{modalOptionsText(field)}}></textarea>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <input class="btn btn-primary" type="submit" value="OK">
+                                            <input class="btn btn-primary" ng-click="updateField(field)" data-dismiss="modal" value="OK">
                                             <input class="btn btn-failure" data-dismiss="modal" type="submit" value="Cancel">
                                         </div>
                                     </div>
