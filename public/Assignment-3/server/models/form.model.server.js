@@ -98,7 +98,7 @@ module.exports = function (app) {
     // get fields by field id
     function findFieldInFormById (formId, fieldId) {
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
                 for (var j in forms[i].fields) {
                     if (forms[i].fields[j]._id === fieldId) {
                         return forms[i].fields[j];
@@ -114,7 +114,7 @@ module.exports = function (app) {
     function createFieldInForm (formId, field) {
         field._id = uuid.v4();
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
                 forms[i].fields.push(field);
                 return forms[i].fields;
             }
@@ -125,9 +125,9 @@ module.exports = function (app) {
     //update a field in a form
     function updateFieldInForm (formId, fieldId, newField) {
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
                 for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
+                    if (forms[i].fields[j]._id == fieldId) {
                         forms[i].fields[j] = newField;
                         forms[i].fields[j]._id = fieldId;
                         return forms[i].fields[j];
@@ -142,9 +142,9 @@ module.exports = function (app) {
     // delete a field in a form
     function deleteFieldInForm (formId, fieldId) {
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
                 for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
+                    if (forms[i].fields[j]._id == fieldId) {
                         forms[i].fields.splice(j, 1);
                         return forms[i].fields;
                     }

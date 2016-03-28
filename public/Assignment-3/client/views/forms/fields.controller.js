@@ -95,13 +95,17 @@
 
         function updateField(field) {
             FieldService.updateField(formId, field._id, field)
-                .then(function(response) {
+                .then(function (response) {
                     $scope.$location = $location;
                 });
         }
 
         function deleteField(field) {
-            $scope.forms.splice(index, 1);
+            FieldService.deleteFieldFromForm(formId, field._id)
+                .then(function (response) {
+                    $scope.model.fields = response.data;
+                });
+            //$scope.model.splice(index, 1);
         }
 
         function modalOptionsText(field) {
