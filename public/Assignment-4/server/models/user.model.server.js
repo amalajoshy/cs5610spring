@@ -3,14 +3,6 @@ module.exports = function (mongoose, db) {
     var q = require("q");
     var UserSchema = require('./user.schema.server.js')(mongoose);
     var userModel = mongoose.model("userModel", UserSchema);
-    var users = require("./user.mock.json");
-    userModel.create(users, function(err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("users successfully saved in db");
-        }
-    });
 
     var api = {
         createUser: createUser,

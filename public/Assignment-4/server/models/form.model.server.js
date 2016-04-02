@@ -4,15 +4,6 @@ module.exports = function (mongoose, db) {
     var uuid = require('node-uuid');
     var FormSchema = require('./form.schema.server.js')(mongoose);
     var formModel = mongoose.model("formModel", FormSchema);
-    var forms = require("./form.mock.json");
-    formModel.create(forms, function(err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("forms successfully saved in db");
-        }
-    });
-    //var uuid = require('node-uuid');
 
     var api = {
         createForm: createForm,
