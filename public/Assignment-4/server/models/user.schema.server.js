@@ -9,7 +9,7 @@ module.exports = function (mongoose) {
         "lastName" : String,
         "emails" : [String],
         "phones" : [String]
-    }, {collection: "cs5610.user"});
+    }, {collection: "cs5610spring.user"});
 
     return UserSchema;
 };

@@ -7,7 +7,7 @@ module.exports = function (mongoose) {
         "fields": [FieldSchema],
         "created": {type: Date, default: Date.now()},
         "updated": {type: Date, default: Date.now()}
-    }, { collection: "cs5610.form" });
+    }, { collection: "cs5610spring.form" });
 
     return FormSchema;
 };
