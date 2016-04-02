@@ -1,8 +1,6 @@
 module.exports = function (app, model, db) {
     "use strict";
 
-    var uuid = require('node-uuid');
-
     // get all forms by userId
     app.get("/api/assignment/user/:userId/form", findFormsByUserID);
     // get form by id

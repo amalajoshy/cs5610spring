@@ -1,7 +1,7 @@
-var q = require("q");
-
 module.exports = function (mongoose, db) {
     "use strict";
+    var q = require("q");
+    var uuid = require('node-uuid');
     var FormSchema = require('./form.schema.server.js')(mongoose);
     var formModel = mongoose.model("formModel", FormSchema);
     var forms = require("./form.mock.json");
@@ -75,13 +75,13 @@ module.exports = function (mongoose, db) {
     // create form
     function createForm(userId, form) {
         var deferred = q.defer();
-        var newform = form;
-        newform.userId = userId;
-        formModel.create(newform, function(err, form){
+        form.userId = userId;
+        form._id = uuid.v4();
+        formModel.create(form, function(err, newForm){
             if (err) {
                 deferred.reject(err);
             } else {
-                deferred.resolve(form);
+                deferred.resolve(newForm);
             }
         });
 

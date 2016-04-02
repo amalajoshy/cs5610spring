@@ -1,7 +1,6 @@
-var q = require("q");
-
 module.exports = function (mongoose, db) {
     "use strict";
+    var q = require("q");
     var UserSchema = require('./user.schema.server.js')(mongoose);
     var userModel = mongoose.model("userModel", UserSchema);
     var users = require("./user.mock.json");
