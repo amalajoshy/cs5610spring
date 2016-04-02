@@ -17,7 +17,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_HOST) {
   var db_password = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
   var db_name = 'cs5610spring';
 
-  dbConnectionString = db_user + ':' + db_password '@' + db_host + ':' + db_port + '/' + db_name;
+  dbConnectionString = db_user + ':' + db_password + '@' + db_host + ':' + db_port + '/' + db_name;
 }
 
 var mongoose = require("mongoose");
