@@ -230,13 +230,21 @@ module.exports = function (mongoose, db) {
             if(err){
                 deferred.reject(err);
             } else {
-                //var newFields = [];
-                //for (var i in form.fields) {
-                //    if (form.fields[i]._id === fieldId) {
-                //        deferred.resolve(form.fields[i]);
-                //    }
-                //}
-                deferred.resolve(null);
+                var newFields = [];
+                for (var i in fieldIds) {
+                    for (var j in form.fields) {
+                        if (form.fields[j]._id == fieldIds[i]) {
+                            newFields[i] = form.fields[j];
+                        }
+                    }
+                }
+                formModel.findByIdAndUpdate(formId, {$set: {"fields": newFields}}, function(err, form) {
+                    if(err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(form);
+                    }
+                });
             }
         });
         return deferred.promise;

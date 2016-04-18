@@ -54,7 +54,6 @@
         }
 
         function updateUser (userId, user) {
-            user.roles = user.roles.split(",");
             AdminService.updateUser(userId, user)
                 .then(function (response) {
                     var updatedUser = response.data;
