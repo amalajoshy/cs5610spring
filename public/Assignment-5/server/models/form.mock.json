@@ -1,0 +1,22 @@
+[
+  {"title": "ToDo", "userId": "56fd84b7aa49c3b95a11d41f",
+    "fields": [
+      {"label": "Title", "type": "TEXT", "placeholder": "Title"},
+      {"label": "Description", "type": "TEXTAREA", "placeholder": "Title"},
+      {"label": "Due Date", "type": "DATE"}
+    ]
+  },
+  {"title": "Contacts", "userId": "56fd84b7aa49c3b95a11d41e",
+    "fields": [
+      {"label": "First Name", "type": "TEXT", "placeholder": "First Name"},
+      {"label": "Last Name", "type": "TEXT", "placeholder": "Last Name"},
+      {"label": "Address", "type": "TEXT", "placeholder": "Address"},
+      {"label": "State", "type": "OPTIONS", "options": [
+        {"label": "Massachussetts", "value": "MA"},
+        {"label": "New Hampshire", "value": "NH"}
+      ]},
+      {"label": "ZIP", "type": "TEXT", "placeholder": "ZIP"},
+      {"label": "Email", "type": "EMAIL", "placeholder": "Email"}
+    ]
+  }
+]

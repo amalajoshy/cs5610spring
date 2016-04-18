@@ -1,0 +1,45 @@
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-lg-6 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1 main">
+            <h1 class="text-center page-header">Admin</h1>
+                <h2 class="text-center profile-title">Users</h2>
+                <table id="admin-table" data-order='[[{{sortColumn}}, "asc"]]' class="table table-bordered table-hover table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th ng-click="saveSortColumn(0)">Username</th>
+                            <th>Password</th>
+                            <th ng-click="saveSortColumn(2)">First Name</th>
+                            <th ng-click="saveSortColumn(3)">Last Name</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <td><input class="col" type="text" id="user" ng-model="user.username" placeholder="Username"></td>
+                            <td><input type="password" id="password" ng-model="user.password" placeholder="Password"></td>
+                            <td><input class="col" type="text"  ng-model="user.firstName"></td>
+                            <td><input class="col" type="text"  ng-model="user.lastName"></td>
+                            <td><input type="text" id="role" ng-model="user.roles" placeholder="role1, role2"></td>
+                            <td><a href="#/admin"><span ng-click="addUser(user)" class="glyphicon glyphicon-plus pull-left"></span></a>
+                                <a href="#/admin"><span ng-click="updateUser(user._id, user)" class="glyphicon glyphicon-ok pull-right"></span></a>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="td_user in users" emit-last-repeater-element>
+                            <td data-order="{{td_user.username}}" class="text-left">{{td_user.username}}</td>
+                            <td></td>
+                            <td data-order="{{td_user.firstName}}" class="text-left">{{td_user.firstName}}</td>
+                            <td data-order="{{td_user.lastName}}" class="text-left">{{td_user.lastName}}</td>
+                            <td class="text-left">{{td_user.roles}}</td>
+                            <td><a href="#/admin"><span ng-click="deleteUser(td_user._id)" class="glyphicon glyphicon-remove pull-left"></span></a>
+                                <a href="#/admin"><span ng-click="selectUser(td_user, $index)" class="glyphicon glyphicon-pencil pull-right"></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+

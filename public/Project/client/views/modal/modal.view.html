@@ -1,0 +1,89 @@
+<div ng-controller="ModalController">
+    <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h3 class="modal-title" id="modal-login-label">Tixter Login</h3>
+                    <p>Not a member yet ?? <a class="page-scroll" data-dismiss="modal" data-toggle="modal" title="register" href="#modal-register">Sign Up</a></p>
+                </div>
+
+                <div class="modal-body">
+
+                    <form role="form" action="" class="login-form">
+                        <div class="form-group">
+                            <label class="sr-only" for="form-username">Username</label>
+                            <input type="email" ng-model="user.username" placeholder="email" class="form-username form-control" id="form-username">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-password">Password</label>
+                            <input type="password" ng-model="user.password" placeholder="password" class="form-password form-control" id="form-password">
+                        </div>
+                        <button type="submit" ng-click="login(user)" class="btn">Sign in!</button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h3 class="modal-title" id="modal-register-label">Tixter Register</h3>
+                    <p> Give details below! </p>
+                </div>
+
+                <div class="modal-body">
+
+                    <form role="form" action="" class="login-form">
+                        <div class="form-group">
+                            <label class="sr-only" for="form-username">Firstname</label>
+                            <input type="text" ng-model="user.firstName" placeholder="First Name" class="form-username form-control" id="register-form-firstname">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-username">Lastname</label>
+                            <input type="text" ng-model="user.lastName" placeholder="Last Name" class="form-username form-control" id="register-form-lastname">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-username">Username</label>
+                            <input type="text" ng-model="user.username" placeholder="username" class="form-username form-control" id="register-form-username">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-password">Set Password</label>
+                            <input type="password" ng-model="user.password" placeholder="password" class="form-password form-control" id="register-form-password">
+                        </div>
+                        <button type="submit" ng-click="register(user)" class="btn">Register!</button>
+                        <div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
+                        <div ng-show="error" class="alert alert-success" role="alert">{{error}}</div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="alertModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2 class="text-center">Nice Job!</h2>
+                    <p class="text-center">You clicked the button, but it doesn't actually go anywhere because this is only a demo.</p>
+                    <p class="text-center"><a href="http://www.bootstrapzero.com">Learn more at BootstrapZero</a></p>
+                    <br/>
+                    <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">OK <i class="ion-android-close"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
