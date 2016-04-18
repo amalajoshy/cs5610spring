@@ -71,7 +71,6 @@ module.exports = function (mongoose, db) {
 
     // update user
     function updateUser(userId, newUser) {
-
         var deferred = q.defer();
         console.log(newUser);
         delete newUser._id;
