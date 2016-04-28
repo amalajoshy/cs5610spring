@@ -1,6 +1,6 @@
-module.exports = function(app, mongoose, db, passport, LocalStrategyForProject, multer) {
+module.exports = function(app, mongoose, db, passport, LocalStrategy, multer) {
     var UserModel = require("./models/user.model.server.js") (mongoose, db);
-    require("./services/user.service.server.js") (app, UserModel, passport, LocalStrategyForProject);
+    require("./services/user.service.server.js") (app, UserModel, passport, LocalStrategy);
 
     var EventModel = require("./models/event.model.server.js") (mongoose, db);
     var TicketModel = require("./models/ticket.model.server.js") (mongoose, db);

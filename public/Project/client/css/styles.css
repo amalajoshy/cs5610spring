@@ -670,6 +670,7 @@ img::-moz-selection {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
+    height: 485px;
 }
 .thumbnail .caption {
     color: inherit;
