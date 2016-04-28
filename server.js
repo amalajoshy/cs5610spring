@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategyForProject = require('passport-local').Strategy;
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 
@@ -38,6 +39,6 @@ var mongoose = require("mongoose");
 var db = mongoose.connect('mongodb://' + dbConnectionString);
 
 require(__dirname + "/public/Assignment-5/server/app.js")(app, mongoose, db, passport, LocalStrategy);
-require(__dirname + "/public/Project/server/app.js")(app, mongoose, db, passport, LocalStrategy, multer);
+require(__dirname + "/public/Project/server/app.js")(app, mongoose, db, passport, LocalStrategyForProject, multer);
 
 app.listen(port, ipaddress);
