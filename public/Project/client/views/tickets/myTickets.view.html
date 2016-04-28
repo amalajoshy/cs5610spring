@@ -1,4 +1,7 @@
 <div class="content">
+    <div ng-show="tickets.length == 0" class="panel-body text-center">
+        <h3>Sorry, you haven't booked any tickets yet! :)</h3>
+    </div>
     <div class="margin-top-2" ng-repeat="ticket in tickets">
         <div id="ticketpanel-{{ticket._id}}" class="panel-body">
             <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">

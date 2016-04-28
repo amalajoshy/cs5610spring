@@ -12,6 +12,7 @@
         $scope.printTicket = printTicket;
         $scope.cancelTicket = cancelTicket;
         $scope.$location = $location;
+        $scope.tickets = null;
 
         $scope.currentUser = UserService.getCurrentUser();
         if (!$scope.currentUser) {
