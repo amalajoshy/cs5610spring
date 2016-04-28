@@ -149,8 +149,6 @@ footer {
 .panel-body {
     /*padding: 30px;*/
     margin-top: 5%;
-    margin-left: 50px;
-    margin-right : 50px;
     background-color: rgba(17, 8, 10, 0.69);
 }
 
@@ -663,17 +661,22 @@ img::-moz-selection {
 
 /*magister events gallery thumbnails */
 
-.thumbnail {
+.thumbnail, .thumbnail-myevent {
     background-color: rgba(255,255,255,.2);
     border: 0 none;
     padding:10px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
+}
+.thumbnail .caption, .thumbnail-myevent .caption {
+    color: inherit;
+}
+.thumbnail {
     height: 485px;
 }
-.thumbnail .caption {
-    color: inherit;
+.thumbnail-myevent {
+    height: 620px;
 }
 
 .btn{

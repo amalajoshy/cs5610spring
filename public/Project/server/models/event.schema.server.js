@@ -14,7 +14,6 @@ module.exports = function (mongoose) {
         totalCapacity: {type: Number, min: 0},
         availableCapacity: {type: Number, min: 0},
         filledCapacity: {type: Number, default: 0, min: 0},
-        volunteerCapacity: {type: Number, min: 0, default: 0},
         ticketPrice: {type: Number, default: 0, min: 0, max: 0},
         url: String,
         category: String,

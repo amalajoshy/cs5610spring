@@ -25,15 +25,11 @@
             }
             UserService.login(user)
                 .then(function (response) {
-                    console.log(response.data);
-                    var user = response.data;
-                    if (user) {
+                    if (response.status == 200) {
+                        var user = response.data;
                         UserService.setCurrentUser(user);
                         $location.url("/");
                         $("#modal-login").modal("hide");
-                    }
-                    if(response.error) {
-                        $scope.error = "Unable to login";
                     }
                 });
         }
