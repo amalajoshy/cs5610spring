@@ -12,19 +12,13 @@
         <div class="navbar-collapse collapse" id="bs-navbar">
             <ul class="nav navbar-nav">
                 <li>
-                    <a class="page-scroll" href="#one">Intro</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#two">Highlights</a>
-                </li>
-                <li>
                     <a class="page-scroll" href="#/events/browse">Events Gallery</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#four">Features</a>
+                <li ng-show="currentUser" ng-class="{'active' : $location.url() == '/myEvents'}">
+                    <a  href="#/events">My Events</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#last">Contact</a>
+                <li ng-show="currentUser" ng-class="{'active' : $location.url() == '/myTickets'}">
+                    <a href="#/tickets">My Tickets</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

@@ -1,7 +1,0 @@
-[
-  {"firstName": "Alice", "lastName": "Wonderland", "username": "alice@gmail.com", "password": "alice", "emails": ["alice@wonderland.com", "alice@gmail.com"], "phones":["123-234-4321", "234-432-2344"]},
-  {"firstName": "Bob", "lastName": "Hope", "username": "bob@gmail.com", "password": "bob", "emails": ["bob@hope.com", "bob@gmail.com"], "phones":["123-234-4321", "234-432-2344"]},
-  {"firstName": "Charlie","lastName": "Brown", "username": "charlie@gmail.com", "password": "charlie", "emails": ["charlie@brown.com", "charlie@gmail.com"], "phones":["123-234-4321", "234-432-2344"]},
-  {"firstName": "Dan", "lastName": "Craig", "username": "dan@gmail.com", "password": "dan", "emails": ["dan@craig.com", "dan@gmail.com"], "phones":["123-234-4321", "234-432-2344"]},
-  {"firstName": "Edward","lastName": "Norton", "username": "ed@gmail.com", "password": "ed", "emails": ["ed@norton.com", "ed@gmail.com"], "phones":["123-234-4321", "234-432-2344"]}
-]

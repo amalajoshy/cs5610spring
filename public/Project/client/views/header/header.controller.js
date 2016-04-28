@@ -12,10 +12,6 @@
     function headerController($location, $scope, UserService) {
         $scope.$location = $location;
         $scope.logout = logout;
-        UserService.getCurrentUser()
-            .then(function(response) {
-                UserService.setCurrentUser(response.data);
-            });
 
         function logout() {
             UserService.logout();

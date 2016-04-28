@@ -14,13 +14,15 @@ module.exports = function (mongoose, db) {
         findAllEvents: findAllEvents,
         findEventById: findEventById,
         findEventsByOrganiserId: findEventsByOrganiserId,
-        findEventsByCategory: findEventsByCategory
+        findEventsByCategory: findEventsByCategory,
+        setEventImageUrl: setEventImageUrl,
+        reserveCapacityForEvent: reserveCapacityForEvent,
+        releaseCapacityForEvent: releaseCapacityForEvent
     };
     return api;
 
 
     function findEventById(id) {
-
         var deferred = q.defer();
         eventModel.findById(id, function (err, event) {
             if (err) {
@@ -63,6 +65,7 @@ module.exports = function (mongoose, db) {
     function createEvent(organiserId, event) {
         var deferred = q.defer();
         event.organiserId = organiserId;
+        event.availableCapacity = event.totalCapacity;
         eventModel.create(event, function (err, newEvent) {
             if (err) {
                 console.log(err);
@@ -110,16 +113,66 @@ module.exports = function (mongoose, db) {
 
     function updateEvent(eventId, newEvent) {
         var deferred = q.defer();
-        eventModel.findByIdAndUpdate(eventId, {$set: newEvent}, function (err, event) {
+        delete newEvent._id;
+        delete newEvent.filledCapacity;
+        eventModel.findByIdAndUpdate(eventId, {$set: newEvent}, {new: true}, function (err, event) {
             if (err) {
                 console.log(err);
                 deferred.reject(err);
             } else {
-                deferred.resolve(event);
+                event.availableCapacity = event.totalCapacity - event.filledCapacity;
+                event.save(function (err, updatedEvent) {
+                    if (err) {
+                        console.log(err);
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(updatedEvent);
+                    }
+                });
             }
         });
         return deferred.promise;
     }
 
+    function setEventImageUrl(eventId, filename) {
+        var deferred = q.defer();
+        eventModel.findByIdAndUpdate(eventId, {$set: {image: filename}}, {new: true}, function(err, event) {
+           if (err) {
+               console.log(err);
+               deferred.reject(err);
+           } else {
+               deferred.resolve(event);
+           }
+        });
+        return deferred.promise;
+    }
+
+    function reserveCapacityForEvent(eventId, requiredCapacity) {
+        var deferred = q.defer();
+        eventModel.findOneAndUpdate({_id: eventId, availableCapacity: {$gte: requiredCapacity}},
+            {$inc: {availableCapacity: -(requiredCapacity), filledCapacity: requiredCapacity}}, {new: true}, function (err, event) {
+                if (err) {
+                    console.log(err);
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(event);
+                }
+        });
+        return deferred.promise;
+    }
+
+    function releaseCapacityForEvent(eventId, releasedCapacity) {
+        var deferred = q.defer();
+        eventModel.findByIdAndUpdate(eventId, {$inc: {availableCapacity: releasedCapacity, filledCapacity: -(releasedCapacity)}},
+            {new: true}, function (err, event) {
+                if (err) {
+                    console.log(err);
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(event);
+                }
+            });
+        return deferred.promise;
+    }
 };
 

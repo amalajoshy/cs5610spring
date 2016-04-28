@@ -11,7 +11,6 @@
                 $routeProvider
                     .when("/", {
                         templateUrl: "views/home/home.view.html"
-                        //controller: "HomeController"
                     })
                     .when("/admin", {
                         templateUrl: "views/admin/admin.view.html",
@@ -21,10 +20,6 @@
                         templateUrl: "views/events/createEvent.view.html",
                         controller: "EventsController"
                     })
-                    .when("/tickets", {
-                        templateUrl: "views/events/tickets.view.html",
-                        controller: "TicketController"
-                    })
                     .when("/event/:eventId", {
                         templateUrl: "views/events/selectedEvent.view.html",
                         controller: "SelectedEventController"
@@ -33,13 +28,21 @@
                         templateUrl: "views/events/browseEvents.view.html",
                         controller: "BrowseEventsController"
                     })
-                    //.when("/events", {
-                    //    templateUrl: "views/events/browseEvents.view.html",
-                    //    controller: "BrowseEventsController"
-                    //})
-                    .when("/fields", {
-                        templateUrl: "views/events/fields.view.html",
-                        controller: "FieldsController"
+                    .when("/events", {
+                        templateUrl: "views/events/myEvents.view.html",
+                        controller: "MyEventsController"
+                    })
+                    .when("/tickets", {
+                        templateUrl: "views/tickets/myTickets.view.html",
+                        controller: "MyTicketsController"
+                    })
+                    .when("/ticket/:ticketId", {
+                        templateUrl: "views/tickets/ticket.view.html",
+                        controller: "TicketController"
+                    })
+                    .when("/event/:eventId/ticket", {
+                        templateUrl: "views/tickets/ticket.view.html",
+                        controller: "TicketController"
                     })
                     .when("/login", {
                         templateUrl: "views/users/login.view.html",

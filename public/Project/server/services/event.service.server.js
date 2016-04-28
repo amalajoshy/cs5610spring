@@ -1,19 +1,19 @@
-module.exports = function (app, model, multer) {
+module.exports = function (app, EventModel, TicketModel, multer) {
     "use strict";
 
     var eventsImageDir = __dirname + "/../uploads/events";
     var eventImageUpload = multer({dest: eventsImageDir});
 
     // get all events by userId
-    app.get("/api/organiser/:organiserId/event", findEventsByOrganiserId);
+    app.get("/api/event/organiser/:organiserId", findEventsByOrganiserId);
     // get event by id
     app.get("/api/event/:eventId", findEventById);
     app.get("/api/event", findAllEvents);
-    app.get("/api/category/:category/event", findEventsByCategory);
+    app.get("/api/event/category/:category", findEventsByCategory);
     // create event
     app.post("/api/event", ensureAuthenticated, createEvent);
     // update event
-    app.put("/api/event/:eventId", updateEvent);
+    app.put("/api/event/:eventId", isOrganiser, updateEvent);
     // delete event
     app.delete("/api/event/:eventId", deleteEvent);
 
@@ -27,13 +27,32 @@ module.exports = function (app, model, multer) {
         }
     }
 
+    function isOrganiser(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(403);
+        } else {
+            EventModel.findEventById(req.params.eventId)
+                .then(function (event) {
+                        if (event && event.organiserId.toString() === req.user._id.toString()) {
+                            next();
+                        } else {
+                            res.send(403);
+                        }
+                });
+        }
+    }
+
     function uploadImage (req, res, next) {
-        console.log(req.file);
-        res.send("Success");
+        var eventId = req.params.eventId;
+        EventModel
+            .setEventImageUrl(eventId, req.file.filename)
+            .then(function(imageFileName){
+                res.json(imageFileName);
+            });
     }
 
     function findAllEvents (req, res) {
-        model
+        EventModel
             .findAllEvents()
             .then(function (events) {
                 res.json(events);
@@ -42,7 +61,7 @@ module.exports = function (app, model, multer) {
 
     function findEventsByOrganiserId (req, res) {
         var organiserId = req.params.organiserId;
-        model
+        EventModel
             .findEventsByOrganiserId(organiserId)
             .then(function(events){
                 res.json(events);
@@ -51,7 +70,7 @@ module.exports = function (app, model, multer) {
 
     function findEventsByCategory (req, res) {
         var category = req.params.category;
-        model
+        EventModel
             .findEventsByCategory(category)
             .then(function(events){
                 res.json(events);
@@ -60,7 +79,7 @@ module.exports = function (app, model, multer) {
 
     function findEventById(req, res){
         var eventId = req.params.eventId;
-        model
+        EventModel
             .findEventById(eventId)
             .then(function(event){
                 res.json(event);
@@ -71,7 +90,7 @@ module.exports = function (app, model, multer) {
     function createEvent (req, res) {
         var organiserId = req.user._id;
         var event = req.body;
-        model
+        EventModel
             .createEvent(organiserId, event)
             .then(function (events) {
                 res.json(events);
@@ -81,7 +100,7 @@ module.exports = function (app, model, multer) {
     function updateEvent (req, res) {
         var eventId = req.params.eventId;
         var newEvent = req.body;
-        model
+        EventModel
             .updateEvent(eventId, newEvent)
             .then(function (event) {
                 res.json(event);
@@ -90,9 +109,17 @@ module.exports = function (app, model, multer) {
 
     function deleteEvent (req, res) {
         var eventId = req.params.eventId;
-        model
+        EventModel
             .deleteEventById(eventId)
             .then(function (events) {
+                if (events) {
+                    TicketModel.findTicketsByEventId(eventId)
+                        .then(function (tickets) {
+                            if (tickets) {
+                                TicketModel.deleteTickets(tickets);
+                            }
+                        });
+                }
                 res.json(events);
             });
 

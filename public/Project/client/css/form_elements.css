@@ -1,17 +1,18 @@
 input[type="text"],
 input[type="password"],
 input[type="email"],
-select,
-select.form-control,
+/*select,*/
+/*select.form-control,*/
 textarea,
-textarea.form-control {
+textarea.form-control,
+.form-control[readonly] {
     height: 50px;
     width: 350px;
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #333;
-    border: 1px solid #333;
+    background: rgba(77, 77, 77, 0.76);
+    border: 1px solid rgba(220, 121, 17, 0.67);
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 300;

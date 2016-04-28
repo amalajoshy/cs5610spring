@@ -16,19 +16,9 @@
             updateEvent: updateEvent,
             findAllEvents: findAllEvents,
             findEventById: findEventById,
-            setCurrentEvent: setCurrentEvent,
-            getCurrentEvent: getCurrentEvent,
             findEventsByCategory: findEventsByCategory
         };
         return services;
-
-        function setCurrentEvent(event) {
-            $rootScope.currentEvent = event;
-        }
-
-        function getCurrentEvent() {
-            return $rootScope.currentEvent;
-        }
 
         function findEventById(eventId) {
             return $http.get("/api/event/" + eventId);
@@ -43,11 +33,11 @@
         }
 
         function findEventsByOrganiserId(userId) {
-            return $http.get("/api/organiser/" + userId + "/event");
+            return $http.get("/api/event/organiser/" + userId);
         }
 
         function findEventsByCategory(category) {
-            return $http.get("/api/category/" + category + "/event");
+            return $http.get("/api/event/category/" + category);
         }
 
         function deleteEvent(eventId) {

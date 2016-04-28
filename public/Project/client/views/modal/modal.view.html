@@ -22,7 +22,11 @@
                             <label class="sr-only" for="form-password">Password</label>
                             <input type="password" ng-model="user.password" placeholder="password" class="form-password form-control" id="form-password">
                         </div>
+                        <div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
+                        <div ng-show="error" class="alert alert-success" role="alert">{{error}}</div>
+
                         <button type="submit" ng-click="login(user)" class="btn">Sign in!</button>
+
                     </form>
 
                 </div>
@@ -40,7 +44,8 @@
                         <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                     </button>
                     <h3 class="modal-title" id="modal-register-label">Tixter Register</h3>
-                    <p> Give details below! </p>
+
+                    <p> Already A User! <a class="page-scroll" data-dismiss="modal" data-toggle="modal"  href="#modal-login">Sign In</a> </p>
                 </div>
 
                 <div class="modal-body">
@@ -62,9 +67,10 @@
                             <label class="sr-only" for="form-password">Set Password</label>
                             <input type="password" ng-model="user.password" placeholder="password" class="form-password form-control" id="register-form-password">
                         </div>
-                        <button type="submit" ng-click="register(user)" class="btn">Register!</button>
                         <div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
                         <div ng-show="error" class="alert alert-success" role="alert">{{error}}</div>
+                        <button type="submit" ng-click="register(user)" class="btn">Register!</button>
+
                     </form>
 
                 </div>
@@ -77,11 +83,10 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h2 class="text-center">Nice Job!</h2>
-                    <p class="text-center">You clicked the button, but it doesn't actually go anywhere because this is only a demo.</p>
-                    <p class="text-center"><a href="http://www.bootstrapzero.com">Learn more at BootstrapZero</a></p>
+                    <h2 class="text-center">Tixter</h2>
+                    <p class="text-center">You have Subscribed for Our Newsletter</p>
                     <br/>
-                    <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">OK <i class="ion-android-close"></i></button>
+                    <button class="text-center btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">OK</button>
                 </div>
             </div>
         </div>

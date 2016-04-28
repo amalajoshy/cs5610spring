@@ -1,75 +1,66 @@
-<div class="container-fluid text-center">
+<div class="panel-body text-center">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-7 col-sm-offset-3 col-xs-12 col-xs-offset-2 main">
+        <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-1 col-xs-7 col-xs-offset-2 main">
             <h1 class="page-header">Create an Event</h1>
-            <form role=form">
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <label>Event Title</label>
-                    <div>
+            <br>
+
+            <form class="form text-left">
+                <div class="form-group row">
+                    <label class=" col-sm-4 form-control-label">Event Title : <span class="glyphicon glyphicon-asterisk"></span></label>
+                    <div class="col-sm-6 input-group">
                         <input type="text" class="form-control" ng-model="event.title" id="eventtitle" placeholder="Give it a short distinct name">
                     </div>
                 </div>
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <label>Location</label>
-                    <div>
+                <div class="form-group row">
+                    <label class="col-sm-4 form-control-label">Location : <span class="glyphicon glyphicon-asterisk"></span></label>
+                    <div class="col-sm-6 input-group">
                         <input type="text" class="form-control" ng-model="event.location" id="pac-input" placeholder="Venue">
                     </div>
                 </div>
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <label>Seats</label>
-                    <div>
-                        <input type="text" class="form-control" ng-model="event.capacity" id="seats" placeholder="Max seats available">
+                <div class="form-group row">
+                    <label class="col-sm-4 form-control-label">Seats : <span class="glyphicon glyphicon-asterisk"></span></label>
+                    <div class="col-sm-6 input-group">
+                        <input type="text" class="form-control" ng-model="event.totalCapacity" id="seats" placeholder="Max seats available">
                     </div>
                 </div>
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <label>Volunteer</label>
-                    <div>
-                        <input type="text" class="form-control" ng-model="event.volunteerCapacity" id="volunteers" placeholder="No of volunteers required">
-                    </div>
-                </div>
-
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <div class='col-md-6'>
-                        <div class="form-group">
-                            <label>Start date</label>
-                            <div class='input-group date' id='start-time'>
+                <div class="form-group row">
+                            <label class="col-sm-4 form-control-label">Start date : <span class="glyphicon glyphicon-asterisk"></span></label>
+                            <div class="col-sm-6 input-group date" id='start-time'>
                                 <input type='text' class="form-control" ng-model="event.startTime" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
-                        </div>
-                    </div>
-                    <div class='col-md-6'>
-                        <div class="form-group">
-                            <label>End date</label>
-                            <div class='input-group date' id='end-time'>
+                </div>
+                    <div class="form-group row">
+                            <label class="col-sm-4 form-control-label">End date :</label>
+                            <div class='col-sm-6 input-group date' id='end-time'>
                                 <input type='text' class="form-control" ng-model="event.endTime" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
-                        </div>
+
                     </div>
-                </div>
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <label>Event Description</label>
-                    <div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 form-control-label">Event Description :</label>
+                    <div class="col-sm-6 input-group">
                         <textarea rows="10" cols="10" class="form-control" ng-model="event.description" id="eventDesc" placeholder="Description"></textarea>
                     </div>
                 </div>
 
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <label>Event Website</label>
-                    <div>
+                <div class="form-group row">
+                    <label class="col-sm-4 form-control-label">Event Website :</label>
+                    <div class="col-sm-6 input-group">
                         <input type="text" class="form-control" ng-model="event.url" id="eventwebsite" placeholder="http://">
                     </div>
                 </div>
 
-                <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-                    <label>Event Category :</label>
-                    <div>
-                        <select name="dropdown" class="form-control" ng-model="event.category">
+                <div class="form-group row">
+                    <label class="col-sm-4 form-control-label">Event Category : <span class="glyphicon glyphicon-asterisk"></span></label>
+                    <div class="col-sm-6 col-lg-6 col-md-6 input-group">
+                        <select ng-model="event.category">
                             <option>Culinary</option>
                             <option>Sports</option>
                             <option>Convention</option>
@@ -78,8 +69,9 @@
                     </div>
                 </div>
                 <br/>
-                <div class="row form-group col-lg-8 col-lg-offset-3">
-                    <button type="submit" class="btn col-lg-6 col-md-12 col-sm-12 col-xs-12" ng-click="createEvent(event)">
+                <div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" ng-click="createEvent(event)">
                         Make Your Event Live
                     </button>
                 </div>

@@ -1,34 +1,30 @@
-<!--<div class="row">-->
-    <!--<br>-->
-    <!--<br>-->
-<!--</div>-->
-<div class="row banner">
-    <div id="Eventlogo" class="col-lg-offset-1 col-md-3 bannerLogo transparent">
-        <div class="row form-group col-lg-10 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8">
-            <!--<img id="Event1Logo" src="css/dummy-logo-cook.png"/>-->
-            <label class="control-label">Upload Image</label>
-            <input id="event-img" name="event-image" type="file" class="file">
-        </div>
-        <!--<img id="Event1Logo" src="css/dummy-logo-cook.png"/>-->
-    </div>
-
-    <div class="col-lg-offset-3 bannerContent">
-        <h2>{{event.title}}</h2>
-        <h4 class="time"><span class="glyphicon glyphicon-time"></span> {{event.startTime}}</h4>
-        <h4 class="location"><span class="glyphicon glyphicon-map-marker"></span> {{event.location}}</h4>
-    </div>
-</div>
 <div class="content">
-    <div class="panel">
-        <div class="row col-md-offset-1">
-            <h3>Register for event</h3>
-            <hr>
+    <div class="banner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div id="event-logo" class="margin-top-1 margin-bottom-1 col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 hidden-sm hidden-xs transparent">
+            <div ng-show="isOrganiser">
+                <input type="file" value="Browse" id="event-img" name="event-image">
+            </div>
         </div>
-        <div class="row col-md-offset-1 col-md-11">
+        <div class="col-lg-6 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <h2 ng-hide="editMode">{{event.title}}</h2>
+            <input class="margin-top-2" ng-show="editMode" type="text" ng-model="event.title">
+            <h4 class="time"><span class="glyphicon glyphicon-time"></span> {{event.startTime}}</h4>
+            <h4 class="location"><span class="glyphicon glyphicon-map-marker"></span> {{event.location}}</h4>
+        </div>
+        <div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1">
+            <button ng-show="isOrganiser && !editMode" class="btn btn-sm" ng-click="editMode = true"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+            <button ng-show="isOrganiser && editMode" class="btn btn-sm" ng-click="updateEvent(event)"><span class="glyphicon glyphicon-ok"></span> Done</button>
+        </div>
+    </div>
+    <div class="panel col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <h3>Register for event</h3>
+        </div>
+        <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
             <table class="table table-bordered table-hover table-responsive text-center">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>Item</th>
                         <th>Quantity</th>
                         <th>Price</th>
                     </tr>
@@ -37,7 +33,7 @@
                     <tr>
                         <td>E-Ticket - {{event.title}}</td>
                         <td>
-                            <select>
+                            <select ng-model="quantity">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -47,76 +43,48 @@
                 </tbody>
             </table>
         </div>
-        <div class="row">
-            <div class="col-md-9 hidden-xs"></div>
-            <div id="booknow" class="col-md-3 col-md-offset-8 col-xs-12">
-                <div class="row">
-                    <div class="col-xs-9 col-lg-push-0">
-                        <span class="txt-grey-14">Fee</span>
-                    </div>
-                    <div class="col-xs-3">
-                        <span class="pull-right">$0.00</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                </div>
-                <div class="row">
-                    <div class="col-xs-9 col-lg-push-0">
-                        <strong class="txt-grey-14">TOTAL</strong>
-                    </div>
-                    <div class="col-xs-3">
-                        <span class="pull-right">$0.00</span>
-                    </div>
-
-                </div>
-                <hr>
-                <div class="input-group pull-right">
-                    <button type="submit" class="btn btn-success">Continue</button>
-                </div>
+        <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Fee</div>
+            <div class="col-lg-1 col-lg-offset-10 col-md-1 col-md-offset-10 col-sm-1 col-sm-offset-8 col-xs-1 col-xs-offset-8">$0.00</div>
+        </div>
+        <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><strong>TOTAL</strong></div>
+            <div class="col-lg-1 col-lg-offset-10 col-md-1 col-md-offset-10 col-sm-1 col-sm-offset-8 col-xs-1 col-xs-offset-8">$0.00</div>
+        </div>
+        <div class="row margin-top-2 margin-bottom-2 col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3 pull-right">
+                <a href="#/event/{{event._id}}" class="btn btn-lg btn-success" role="button" ng-click="registerForEvent(event, quantity)">Book Now</a>
+            </div>
+            <div class="row margin-top-2 margin-bottom-2 col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-6 col-xs-offset-1">
+                 <div ng-show="error" class="alert alert-warning" role="alert">{{error}}</div>
             </div>
         </div>
     </div>
-    <div class="panel">
-        <div class="row col-md-offset-1 text-justify">
+    <div class="panel col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 text-justify">
             <h3>Event Details</h3>
-            <p>{{event.description}}</p>
+            <p ng-hide="editMode">{{event.description}}</p>
+            <textarea class="margin-bottom-2 col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="editMode" ng-model="event.description"></textarea>
+            <h5 ng-show="isOrganiser && editMode">Total Capacity: {{event.totalCapacity}}</h5>
+            <h5 ng-show="isOrganiser && editMode">Available seats: {{event.availableCapacity}}</h5>
+            <p ng-show="isOrganiser && editMode">
+                Add more seats: <input ng-show="isOrganiser && editMode" type="text" ng-model="additionalCapacity" placeholder="0">
+            </p>
+
         </div>
     </div>
-    <div class="panel">
-        <div class="row col-md-offset-1 text-justify">
+    <div class="panel col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 text-justify">
             <h3>Location</h3>
             <div id="map"></div>
         </div>
     </div>
-    <div class="panel">
-        <div class="row col-md-offset-1 text-justify">
-            <h3>About Organizer</h3>
-            <div class="organizerContent col-xs-12 col-md-8">
-                <p>
-                    <span>RSVP to alice.wonderland@email.com</span>
-                </p>
-            </div>
-            <div class="gradient-box col-xs-12 col-md-offset-7 col-md-4">
-                <ul>
-                    <li class="web">
-                        <span>http://www.alicewonderland.com</span>
-                    </li>
-                    <li class="tel">
-                        <span>0450133937</span>
-                    </li>
-                    <li class="mail">
-                        <a href="https://www.facebook.com/" target="_blank">facebook.com/?ref=hl</a>
-                    </li>
-                    <li class="mail">
-                        <a href="javascript:void(0);" id="triggerContact">Contact Organizer</a>
-                    </li>
-                    <li class="fb hide">Like us on Facebook</li>
-                    <li class="tw hide">Follow us on Twitter</li>
-                    <li class="other b-t-1 bold">
-                        <a href="http://cs5610spring-amala.rhcloud.com/Project/"  target="_blank">View Other events</a>
-                    </li>
-                </ul>
+    <div class="panel col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 text-justify">
+            <h3>Organised By</h3>
+            <div class="gradient-box">
+                <h4><span ng-show="organiser.firstName">{{organiser.firstName}}</span> <span ng-show="organiser.lastName">{{organiser.lastName}}</span></h4>
+                <h5><span ng-show="organiser.username">{{organiser.username}}</span></h5>
             </div>
         </div>
     </div>

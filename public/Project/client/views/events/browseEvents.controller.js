@@ -8,16 +8,31 @@
         .module("TixterApp")
         .controller("BrowseEventsController", browseEventsController);
 
-    function browseEventsController($scope, $location, EventService, $rootScope) {
-        $scope.selectEvent = selectEvent;
+    function browseEventsController($scope, EventService) {
+        $scope.filterEvents = filterEvents;
+        $scope.category = "All";
+        $scope.categoryOptions = ["All", "Convention", "Culinary", "Fun", "Sports"];
 
-        EventService.findAllEvents()
-            .then(function(response){
-                $scope.events = response.data;
-            });
+        $(window).scrollTop(0);
 
-        function selectEvent(event) {
-            EventService.setCurrentEvent(event);
+        findAllEvents();
+
+        function findAllEvents() {
+            EventService.findAllEvents()
+                .then(function (response) {
+                    $scope.events = response.data;
+                });
+        }
+
+        function filterEvents(category) {
+            if (category === "All") {
+                findAllEvents();
+            } else {
+                EventService.findEventsByCategory(category)
+                    .then(function (response) {
+                        $scope.events = response.data;
+                    });
+            }
         }
     }
 }());

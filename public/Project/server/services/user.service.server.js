@@ -3,22 +3,14 @@ module.exports = function (app, UserModel, passport, LocalStrategy) {
 
     var bcrypt = require("bcrypt-nodejs");
 
-    app.post("/api/login", passport.authenticate("local"), login);
+    app.post("/api/login", passport.authenticate("tixter"), login);
     app.post("/api/isloggedin", loggedin);
     app.post("/api/logout", logout);
     app.post('/api/register', register);
 
     // find user
     app.get("/api/user", function (req, res) {
-        if ("username" in req.query) {
-            if ("password" in req.query) {
-                findUserByCredentials(req, res);
-            } else {
-                findUserByUsername(req, res);
-            }
-        } else {
-            findAllUsers(req, res);
-        }
+        findAllUsers(req, res);
     });
     // find user by id
     app.get("/api/user/:id", findUserById);
@@ -28,10 +20,8 @@ module.exports = function (app, UserModel, passport, LocalStrategy) {
     app.put("/api/user/:id", updateUser);
     // delete user
     app.delete("/api/user/:id", deleteUser);
-    // find user by username
-    app.get("/api/user?username=:username", findUserByUsername);
 
-    passport.use("local", new LocalStrategy(
+    passport.use("tixter", new LocalStrategy(
         function(username, password, done) {
             UserModel.findUserByUsername(username)
                 .then(
@@ -54,16 +44,23 @@ module.exports = function (app, UserModel, passport, LocalStrategy) {
     ));
 
     passport.serializeUser(function(user, done) {
-        done(null, user);
+        done(null, user._id);
     });
 
-    passport.deserializeUser(function(user, done) {
-        done(null, user);
-        //UserModel.findUserById(user._id, function(err, user) {
-        //    console.log(user);
-        //
-        //});
+    passport.deserializeUser(function(userId, done) {
+        UserModel.findUserById(userId)
+            .then(function (user) {
+                done(null, user);
+            });
     });
+
+    function auth(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
 
     function login(req, res) {
         var user = req.user;
@@ -138,33 +135,6 @@ module.exports = function (app, UserModel, passport, LocalStrategy) {
             .deleteUser(userId)
             .then(function(users){
                 res.json(users);
-            });
-    }
-
-    function findUserByCredentials (req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
-        //console.log(username);
-        //console.log(password);
-        //for (var u in users) {
-        //    if (users[u].username === username && users[u].password === password) {
-        //        res.json(users[u]);
-        //    }
-        //}
-        //res.json(null);
-        UserModel
-            .findUserByCredentials(username, password)
-                .then(function(user){
-                res.json(user);
-            });
-    }
-
-    function findUserByUsername (req, res) {
-        var username = req.query.username;
-        UserModel
-            .findUserByUsername(username)
-            .then(function(user){
-                res.json(user);
             });
     }
 }

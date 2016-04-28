@@ -15,13 +15,25 @@
         $scope.register = register;
 
         function login (user) {
+            if (!user.username) {
+                $scope.message = "Please enter Username";
+                return;
+            }
+            if (!user.password) {
+                $scope.message = "Please enter a password";
+                return;
+            }
             UserService.login(user)
                 .then(function (response) {
+                    console.log(response.data);
                     var user = response.data;
                     if (user) {
                         UserService.setCurrentUser(user);
-                        $location.url("/profile");
+                        $location.url("/");
                         $("#modal-login").modal("hide");
+                    }
+                    if(response.error) {
+                        $scope.error = "Unable to login";
                     }
                 });
         }

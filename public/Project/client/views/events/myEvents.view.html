@@ -1,0 +1,27 @@
+<div class="panel-body">
+    <h2 class="text-center title">Events Organised by you :</h2>
+    <p class="lead text-center">
+        Welcome to your Tixter Event collection<br>
+        <a href="#/createEvent">Create</a> another event!
+    </p>
+    <div class="row">
+        <div class="col-sm-4" ng-repeat="event in events" ng-class="{'col-sm-offset-2': $index % 2 == 0}">
+            <div class="thumbnail">
+                <img ng-show="event.image" src="/Project/server/uploads/events/{{event.image}}">
+                <img ng-hide="event.image" src="css/event_thumbnails/sshot3.jpg" alt="">
+                <div class="caption">
+                    <div><h2>
+                        <a href="#/event/{{event._id}}">{{event.title}}</a>
+                    </h2>
+                    <h5>{{event.location}}</h5>
+                    <h5>{{event.startTime}}</h5>
+                    <p>{{event.description}}</p>
+                    </div>
+                    <h3>Event status :</h3>
+                    <p>Available seats : {{event.availableCapacity}}</p>
+                    <div><a href="#/events" ng-click="deleteEvent(event)"><span class="glyphicon glyphicon-remove"></span> Delete Event</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

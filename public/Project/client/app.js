@@ -5,5 +5,15 @@
     'use strict';
     /*global angular*/
     angular
-        .module("TixterApp", ["ngRoute"]);
+        .module("TixterApp", ["ngRoute"])
+        .run(function ($rootScope, UserService, $http) {
+            loadUserProfile()
+                .then(function(response) {
+                    UserService.setCurrentUser(response.data);
+                });
+
+            function loadUserProfile() {
+                return $http.post("/api/isloggedin");
+            }
+        });
 }());
