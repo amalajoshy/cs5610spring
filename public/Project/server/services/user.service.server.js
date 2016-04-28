@@ -1,4 +1,4 @@
-module.exports = function (app, UserModel, passport, LocalStrategy) {
+module.exports = function (app, UserModel, passport, LocalStrategyForProject) {
     "use strict";
 
     var bcrypt = require("bcrypt-nodejs");
@@ -21,7 +21,7 @@ module.exports = function (app, UserModel, passport, LocalStrategy) {
     // delete user
     app.delete("/api/user/:id", deleteUser);
 
-    passport.use("tixter", new LocalStrategy(
+    passport.use("tixter", new LocalStrategyForProject(
         function(username, password, done) {
             UserModel.findUserByUsername(username)
                 .then(
